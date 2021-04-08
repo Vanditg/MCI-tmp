@@ -4,7 +4,9 @@ import plotly.figure_factory as ff
 import dash_core_components as dcc
 import dash_html_components as html
 from dash.dependencies import Input, Output
-
+external_stylesheets = ['https://codepen.io/chriddyp/pen/bWLwgP.css']
+app = dash.Dash(__name__, external_stylesheets=external_stylesheets)
+server = app.server
 trace=mid.Scatter(x=[0,13,25,50],
                   y=[0,0,0,0],
                   mode="lines,markers",
@@ -62,7 +64,6 @@ gen1 = mid.Figure(trace1)
 gen2 = mid.Figure(trace2)
 gen3 = mid.Figure(trace3)
 
-app=dash.Dash()
 app.layout=html.Div(
     children=[
         html.Div(
