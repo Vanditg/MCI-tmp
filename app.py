@@ -25,7 +25,14 @@ from dash.dependencies import Output, Input
 app = dash.Dash(__name__)
 server = app.server
 
-print('Hello')
+top_markdown_text = '''
+This is my first deployed app
+'''
+app.layout = html.Div([
+
+    dcc.Markdown(children=top_markdown_text),
+
+])
       
 #Main method
 if __name__=='__main__':
