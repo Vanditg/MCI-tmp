@@ -26,7 +26,7 @@ app = dash.Dash(__name__, external_stylesheets=external_stylesheets)
 server = app.server
 
 #Creating dataframe
-df = pd.read_csv("C:/Users/gajja/Desktop/MCI_Project_Final/DatasetFiles/datasheet_1.csv")
+df = pd.read_csv("https://github.com/Vanditg/MCI-tmp/blob/main/datasheet_1.csv")
 
 #Extracting different datapoints
 SampleNames = df["SampleNames"].tolist()
