@@ -7,6 +7,10 @@
 ## Milestone-1 Codebase
 ##=============================================
 
+#################################################
+####### Drop-down menu for individual generations
+#################################################
+
 #Importing utilites
 import dash
 from plotly.subplots import make_subplots
@@ -18,15 +22,12 @@ import dash_html_components as html
 import dash_core_components as dcc
 from dash.dependencies import Output, Input
 
-#################################################
-####### Data Visulisation for all the data-points
-#################################################
-external_stylesheets = ['https://codepen.io/chriddyp/pen/bWLwgP.css']
-app = dash.Dash(__name__, external_stylesheets=external_stylesheets)
+app = dash.Dash(__name__)
 server = app.server
 
 #Creating dataframe
 df = pd.read_csv("https://github.com/Vanditg/MCI-tmp/blob/main/datasheet_1.csv")
+
 
 #Extracting different datapoints
 SampleNames = df["SampleNames"].tolist()
@@ -45,22 +46,37 @@ totalCells = df["TotalCells"].tolist()
 
 timeHrs = df["TimeHrs"].tolist()
 
-#Making Subplots
-fig = make_subplots(rows=2, cols=9)
+#Creating application using Python-dash
+#app = dash.Dash(__name__)
 
-####SampleNames: 0.19, 0.38, 0.75, 1.5, 3
-fig.add_trace(go.Box(x=timeHrs[0:15], y=totalCells[0:15]), row=1, col=1)
-fig.add_trace(go.Box(x=timeHrs[15:30], y=totalCells[15:30]), row=1, col=2)
-fig.add_trace(go.Box(x=timeHrs[30:45], y=totalCells[30:45]), row=1, col=3)
-fig.add_trace(go.Box(x=timeHrs[45:60], y=totalCells[45:60]), row=1, col=4)
-fig.add_trace(go.Box(x=timeHrs[60:75], y=totalCells[60:75]), row=1, col=5)
-fig.add_trace(go.Box(x=timeHrs[75:90], y=totalCells[75:90]), row=1, col=6)
-fig.add_trace(go.Box(x=timeHrs[90:105], y=totalCells[90:105]), row=1, col=7)
-fig.add_trace(go.Box(x=timeHrs[105:120], y=totalCells[105:120]), row=1, col=8)
-fig.add_trace(go.Box(x=timeHrs[120:135], y=totalCells[120:135]), row=1, col=9)
+#Creating layout
+app.layout = html.Div([
+    html.H1("Modelling Immune Response in Python"),
+    dcc.Dropdown(id='sample-names',
+                 options=[{'label': x, 'value': x}
+                          for x in sorted(df.SampleNames.unique())],
+                 value='0.19'
+                 ),
+    dcc.Graph(id='my-graph', figure={}
+              )
+])
 
-fig.update_layout(font_family="Courier New", font_color="blue", title_font_family="Times New Roman", title_font_color="red", legend_title_font_color="green", height=500, width=2000, title={'text': "Modelling Immune Responses in Python"})
-fig.show()
+#Making callbacks
+@app.callback(
+    Output(component_id='my-graph', component_property='figure'),
+    Input(component_id='sample-names', component_property='value')
+)
 
-if __name__ == '__main__':
- app.run_server(debug=True)
+#Defining function for interaction
+def interactive_graphs(sample_names_choice):
+    #print(time_hrs_choice)
+    dff = df[df.SampleNames == sample_names_choice]
+
+    fig = px.box(data_frame=dff[0:135], x='TimeHrs', y='TotalCells', title="TimeHrs Stamp vs. Total Number of Cells for different SampleNames Chart", points="all")
+
+    #fig.update_yaxes(range=[0, 50000])
+    return fig
+
+#Main method
+if __name__=='__main__':
+    app.run_server(debug=True)
