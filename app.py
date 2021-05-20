@@ -28,6 +28,17 @@ import io
 external_stylesheets = ['https://codepen.io/chriddyp/pen/bWLwgP.css']
 app = dash.Dash(__name__, external_stylesheets=external_stylesheets)
 server = app.server
+
+top_markdown_text = '''
+This is my first deployed app
+'''
+
+app.layout = html.Div([
+
+    dcc.Markdown(children=top_markdown_text),
+
+])
+
 #Creating dataframe
 path_csv='https://github.com/Vanditg/MCI_tmp/blob/main/datasheet_1.csv?raw=true'
 
