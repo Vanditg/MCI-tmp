@@ -659,10 +659,10 @@ fig.update_layout(font_family="Courier New", font_color="blue", title_font_famil
 fig.show()
 
 app.layout = html.Div(children=[
-    html.H1(children='Hello Dash'),
+    html.H1(children='Modelling Immune Responses in Python'),
 
     html.Div(children='''
-        Dash: A web application framework for Python.
+        Modelling Immune Responses in Python
     '''),
 
     dcc.Graph(
