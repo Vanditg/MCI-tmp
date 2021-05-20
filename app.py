@@ -658,5 +658,17 @@ fig.update_yaxes(title_text="Cells")
 fig.update_layout(font_family="Courier New", font_color="blue", title_font_family="Times New Roman", title_font_color="red", legend_title_font_color="green", height=500, width=2000, title={'text': "Modelling Immune Responses in Python"})
 fig.show()
 
+app.layout = html.Div(children=[
+    html.H1(children='Hello Dash'),
+
+    html.Div(children='''
+        Dash: A web application framework for Python.
+    '''),
+
+    dcc.Graph(
+        id='example-graph',
+        figure=fig
+    )
+])
 if __name__ == '__main__':
     app.run_server(debug=True)
