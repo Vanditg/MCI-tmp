@@ -20,13 +20,29 @@ import numpy as np
 import dash_html_components as html
 import dash_core_components as dcc
 from dash.dependencies import Output, Input
-
+import io
 #################################################
 ####### TimeHrs vs. TotalCells Chart
 #################################################
 
+external_stylesheets = ['https://codepen.io/chriddyp/pen/bWLwgP.css']
+app = dash.Dash(__name__, external_stylesheets=external_stylesheets)
+server = app.server
+
+top_markdown_text = '''
+This is my first deployed app
+'''
+
+app.layout = html.Div([
+
+    dcc.Markdown(children=top_markdown_text),
+
+])
+
 #Creating dataframe
-df = pd.read_csv("C:/Users/gajja/Desktop/MCI_Project_Final/DatasetFiles/datasheet_1.csv")
+path_csv='https://github.com/Vanditg/MCI_tmp/blob/main/datasheet_1.csv?raw=true'
+
+df=pd.read_csv(path_csv, error_bad_lines=False)
 
 #Extracting different datapoints
 SampleNames = df["SampleNames"].tolist()
@@ -595,3 +611,18 @@ fig.update_yaxes(title_text="Generation Cells", row=4, col=1)
 
 fig.update_layout(font_family="Courier New", font_color="blue", title_font_family="Times New Roman", title_font_color="red", legend_title_font_color="green", height=2000, width=1000, title={'text': "Modelling Immune Responses in Python"},)
 fig.show()
+
+app.layout = html.Div(children=[
+    html.H1(children='Modelling Immune Responses in Python'),
+
+    html.Div(children='''
+        Modelling Immune Responses in Python
+    '''),
+
+    dcc.Graph(
+        id='example-graph',
+        figure=fig
+    )
+])
+if __name__ == '__main__':
+    app.run_server(debug=True)
