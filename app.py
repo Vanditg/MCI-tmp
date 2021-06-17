@@ -2055,8 +2055,13 @@ fig.add_trace(go.Scatter(
     mode="lines + markers",), row=9, col=4)
 
 fig.update_xaxes(title_text="Generations", row=9, col=1)
+
+fig.update_xaxes(title_text="Generations", row=1, col=1)
+fig.update_xaxes(title_text="Generations", row=2, col=1)
 fig.update_xaxes(title_text="Generations", row=9, col=3)
 fig.update_xaxes(title_text="Time - Period", row=9, col=2)
+fig.update_xaxes(title_text="Time - Period", row=1, col=2)
+fig.update_xaxes(title_text="Time - Period", row=2, col=2)
 fig.update_xaxes(title_text="Time - Period", row=9, col=4)
 
 fig.update_yaxes(range=[0, 73000], row=1, col=1)
@@ -2099,8 +2104,9 @@ fig.update_yaxes(range=[0, 3300], row=7, col=4)
 fig.update_yaxes(range=[0, 3300], row=8, col=4)
 fig.update_yaxes(range=[0, 3300], row=9, col=4)
 fig.update_yaxes(title_text="Generation Cells", row=4, col=1)
-fig.update_yaxes(title_text="Generation Cells", row=4, col=3)
-fig.update_yaxes(title_text="Cohort Number", row=4, col=2)
+fig.update_yaxes(title_text="Generation Cells", row=1, col=1)
+fig.update_yaxes(title_text="Generation Cells", row=2, col=1)
+fig.update_yaxes(title_text="Cohort Number", row=4, col=3)
 fig.update_yaxes(title_text="Cohort Number", row=4, col=4)
 
 fig.update_layout(font_family="Courier New", font_color="blue", title_font_family="Times New Roman", title_font_color="red", legend_title_font_color="green", height=2000, width=1900, title={'text': "Modelling Immune Responses in Python"},)
